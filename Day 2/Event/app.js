@@ -29,7 +29,7 @@ const logger = new Logger();
 
 // Register a listener
 logger.on('messageLogged', function(arg){
-    // varilable arg, yang bisa kalian pakai
+    // variable arg, yang bisa kalian pakai
     // isi di dalam arg => json object dengan ID 1, dan url bla bla bla
     console.log('Listener called', arg);
 });

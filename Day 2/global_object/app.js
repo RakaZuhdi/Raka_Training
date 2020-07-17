@@ -1,4 +1,4 @@
-var message = "ini message not global. Hanya berjalan di node ini saja.";
+var message = "message ini bukan global. Hanya berjalan di node ini saja.";
 console.log(message);
 
 
