@@ -81,7 +81,7 @@ app.post('/api/courses', (req, res) =>{
 
 //Web service untuk update
 
-app.put('api/course/:id', (req, res) => {
+app.put('api/courses/edit/:id', (req, res) => {
     //cari coursenya.
     //klo gk ketemu, return 404.
 
@@ -91,14 +91,11 @@ app.put('api/course/:id', (req, res) => {
     //klo semuanya memenuhi persyaratan, update.coursenya.
     //return object course yg telah diupdate.
 
-
-    console.log('Someone is opening page 2');
+    console.log('Someone is opening edit page');
     const findCourse = courses.find(c => c.id === parseInt(req.params.id));
     if(!findCourse){
-
         console.log('Object not found!');
         return res.status(404).send('The course with given ID was not found.'); //resorce tidak ditemukan
-        
     }
 
     //Object Destructure
