@@ -56,13 +56,6 @@ app.get("/api/courses/:id", (req, res) => {
 *
 */
 app.post("/api/courses", (req, res) => {
-
-
-    /*
-    * 
-    * SCHEMA UNTUK VALIDASI OBJECT YANG MASUK KE HTTP REQUEST
-    *
-    */
     const {error} = validateCourse(req.body); 
     if( error ){
         // 400 Bad Request
@@ -79,11 +72,6 @@ app.post("/api/courses", (req, res) => {
 
 });
 
-/*
-*
-* WEB SERVICE UNTUK UPDATE 1 COURSE BASED ON COURSE ID
-*
-*/
 app.put('/api/courses/:id', (req, res) => {
 
     // validasi
@@ -108,16 +96,6 @@ app.put('/api/courses/:id', (req, res) => {
 
 });
 
-
-
-
-
-
-/*
-*
-* WEB SERVICE UNTUK DELETE 1 COURSE BASED ON COURSE ID
-*
-*/
 app.delete('/api/courses/:id', (req, res) => {
 
     // cari course nya
@@ -134,13 +112,6 @@ app.delete('/api/courses/:id', (req, res) => {
 
 });
 
-
-
-
-
-
-
-
 function validateCourse(course){
     const schema = Joi.object({
         name: Joi.string().min(3).required()
@@ -149,27 +120,6 @@ function validateCourse(course){
     return schema.validate(course);
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-*
-* START WEB SERVICE
-*
-*/
 
 const port = process.env.PORT || 3000;
 

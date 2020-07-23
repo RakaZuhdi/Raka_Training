@@ -1,0 +1,165 @@
+<html>
+    <head>
+        <title>CRUD for Accounts</title>
+    </head>
+    <body>
+        <table>
+            <div>
+                <tr>
+                    <td>Get All Accounts</td><td>Get Account Detail</td><td>Delete Account</td><td>Update Account</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><input type='text' placeholder='Input id' id='id_AccountDetail'></td>
+                    <td><input type='text' placeholder='Input id' id='id_DeleteAccount'></td>
+                    <td><input type='text' placeholder='Input id to update' id='id_UpdateAccount'></td>
+                </tr>
+                <tr>
+                    <td><button onclick='getAllAccounts()'>Click Here</button></td>
+                    <td><button onclick='getAccountDetail()'>Click Here</button></td>
+                    <td><button onclick='DeleteAccount()'>Click Here</button></td>
+                    <td><button onclick='updateAccount1()'>Click Here</button></td>
+                </tr>
+            </div>
+        </table>
+        <table id='result'class='container'>
+        </table>
+        <form id='form'>
+        </form>
+        <div><!--
+            <form id='id_Form'>
+                <input type='text' id='id_Username' placeholder="Input new username" value='"+account.username+"'><br>
+                <input type='text' id='id_Email' Placeholder='Input new e-mail' value='"+account.email+"'><br>
+                <input type='text' id='id_Password' placeholder='Input new password' value='"+account.password+"'><br>
+                <input type='text' id='id_PaymentType' placeholder='Input new payment type' value='"+account.paymentType+"'><br>
+                <input type='text' id='id_CardNumber' placeholder='Input new card number' value='"+account.cardNumber+"'><br>
+                <input type='text' id='id_expireMonth' placeholder='Input new card expire date(month)'value='"+account.expirationDateMonth+"'><br>
+                <input type='text' id='id_expireYear' placeholder='Input new card expire date(year)'value='"+account.expirationDateYear+"'><br>
+                <button onclick='updateAccount()'>Click to update</button>
+            </form>-->
+        </div>
+    </body>
+
+    <script>
+
+        function getAllAccounts() {
+            var url  = "http://localhost:3000/api/accounts";
+            var xhr  = new XMLHttpRequest();
+            var content = "<tr><th>ID</th><th>Username</th></tr>";
+            xhr.open('GET', url, true);
+            xhr.onload = function() {
+                var accounts = JSON.parse(xhr.responseText);
+                if (xhr.readyState == 4 && xhr.status == "200") {
+                    accounts.forEach((val) => {
+                        content += "<tr><td>" + val.id + "</td><td>" + val.username + "</td></tr>";
+                    })
+                    document.getElementById('result').innerHTML = content;
+                } else {
+                    console.error(accounts);
+                }
+            }
+            xhr.send(null);
+        }
+
+        function getAccountDetail() {
+            var url  = "http://localhost:3000/api/accounts/" + document.getElementById('id_AccountDetail').value;
+            var xhr  = new XMLHttpRequest();
+            var content = '';
+            xhr.open('GET', url, true);
+            xhr.onload = function() {
+                var account = JSON.parse(xhr.responseText);
+                if (xhr.readyState == 4 && xhr.status == "200") {
+                    content += "<b>ID</b>: " + account.id + "<br><b>Username</b>: " + account.username + "<br><b>E-mail</b>: " + account.email + "<br><b>Password</b>: " + account.password + "<br><b>Payment Type</b>: " + account.paymentType + "<br><b>Card Number</b>: " + account.cardNumber + "<br><b>Expire date (month)</b>: " + account.expirationDateMonth + "<br><b>Expire date (year)</b>: " + account.expirationDateYear+ "</td></tr>";
+                    document.getElementById('result').innerHTML = content;
+                } else {
+                    console.error(accounts);
+                }
+            }
+            xhr.send(null);
+        }
+
+        function updateAccount1(){
+            var url  = "http://localhost:3000/api/accounts/" + document.getElementById('id_UpdateAccount').value;
+            var id = document.getElementById('id_UpdateAccount').value;
+            var xhr  = new XMLHttpRequest();
+            xhr.open('GET', url, true);
+            xhr.onload = function() {
+                var account = JSON.parse(xhr.responseText);
+                if (xhr.readyState == 4 && xhr.status == "200") {
+                    var form ="<form id='id_Form'><input type='text' id='id_Username' placeholder='Input new username' value='"+account.username+"'><br><input type='text' id='id_Email' Placeholder='Input new e-mail' value='"+account.email+"'><br><input type='text' id='id_Password' placeholder='Input new password' value='"+account.password+"'><br><input type='text' id='id_PaymentType' placeholder='Input new payment type' value='"+account.paymentType+"'><br><input type='text' id='id_CardNumber' placeholder='Input new card number' value='"+account.cardNumber+"'><br><input type='text' id='id_expireMonth' placeholder='Input new card expire date(month)'value='"+account.expirationDateMonth+"'><br><input type='text' id='id_expireYear' placeholder='Input new card expire date(year)'value='"+account.expirationDateYear+"'><br><input type='hidden' id='hiddenID' value='"+id+"'>";
+                    var button = "<button onclick='updateAccount()'>Click to update</button></form>";
+                    document.getElementById('result').innerHTML = form + button;
+                } else {
+                    console.error(accounts);
+                }
+            }
+            xhr.send(null);
+        }
+
+        function updateAccount() {
+            var url = "http://localhost:3000/api/accounts/" + document.getElementById('hiddenID').value;
+            console.log('Edit account has been initialized 1!');
+            var data = {};
+            
+            data.username = document.getElementById('id_Username').value;
+            data.email = document.getElementById('id_Email').value;
+            data.password = document.getElementById('id_Password').value;
+            data.paymentType = document.getElementById('id_PaymentType').value;
+            data.cardNumber = document.getElementById('id_CardNumber').value;
+            data.expireMonth = document.getElementById('id_expireMonth').value;
+            data.expireYear = document.getElementById('id_expireYear').value;
+
+            var json = JSON.stringify(data);
+            var xhr = new XMLHttpRequest();
+            
+            xhr.open('PUT', url, true);
+            xhr.setRequestHeader('Content-type','application/json; charset=utf-8');
+            xhr.onload = function() {
+                var course = JSON.parse(xhr.responseText);
+                if (xhr.readyState == 4 && xhr.status == "200") {
+                    var alert = "User data has been changed!";
+                    document.getElementById('result').innerHTML = alert;
+                } else {
+                    console.error(users);
+                }
+            }
+            xhr.send(json);
+        }
+
+        function getAccountDetailForEdit() {
+            var url  = "http://localhost:3000/api/accounts/" + document.getElementById('id_AccountDetail').value;
+            var xhr  = new XMLHttpRequest();
+            var content = '';
+            xhr.open('GET', url, true);
+            xhr.onload = function() {
+                var account = JSON.parse(xhr.responseText);
+                if (xhr.readyState == 4 && xhr.status == "200") {
+                    content += "<b>ID</b>: " + account.id + "<br><b>Username</b>: " + account.username + "<br><b>E-mail</b>: " + account.email + "<br><b>Password</b>: " + account.password + "<br><b>Payment Type</b>: " + account.paymentType + "<br><b>Card Number</b>: " + account.cardNumber + "<br><b>Expire date (month)</b>: " + account.expirationDateMonth + "<br><b>Expire date (year)</b>: " + account.expirationDateYear+ "</td></tr>";
+                    document.getElementById('result').innerHTML = content;
+                } else {
+                    console.error(users);
+                }
+            }
+            xhr.send(null);
+        }
+
+        function DeleteAccount() {
+            var url  = "http://localhost:3000/api/accounts/" + document.getElementById('id_DeleteAccount').value;
+            var id = document.getElementById('id_DeleteAccount').value;
+            var xhr  = new XMLHttpRequest();
+            var content = '';
+            xhr.open('DELETE', url, true);
+            xhr.onload = function() {
+                var account = JSON.parse(xhr.responseText);
+                if (xhr.readyState == 4 && xhr.status == "200") {
+                    content='User with id: '+id+' has been deleted!';
+                    document.getElementById('result').innerHTML = content;
+                } else {
+                    console.error(users);
+                }
+            }
+            xhr.send(null);
+        }
+    </script>
+
+</html>
