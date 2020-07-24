@@ -97,7 +97,7 @@
         }
 
         function updateAccount() {
-            var url = "http://localhost:3000/api/accounts/" + document.getElementById('hiddenID').value;
+            var url = "http://localhost:3000/api/accountsRegistration/" + localStorage.getItem('userID');
             console.log('Edit account has been initialized 1!');
             var data = {};
             
@@ -127,7 +127,7 @@
         }
 
         function getAccountDetailForEdit() {
-            var url  = "http://localhost:3000/api/accounts/" + document.getElementById('id_AccountDetail').value;
+            var url  = "https://localhost:3000/api/accounts/" + document.getElementById('id_AccountDetail').value;
             var xhr  = new XMLHttpRequest();
             var content = '';
             xhr.open('GET', url, true);

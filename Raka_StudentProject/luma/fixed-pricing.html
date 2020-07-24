@@ -213,14 +213,14 @@
 
 
 
-
+            <button onclick='ShowAll()'>show</button>
             <div class="page-section bg-primary">
                 <div class="container page__container">
                     <!-- <div class="hero text-center pb-64pt">
       <h1 class="text-white">Upgrade</h1>
       <p class="text-white-50 lead measure-hero-lead mx-auto">Change your future today with over 1.000 professional courses from the top industry leading teachers and professionals.</p>
-    </div> -->
-                    <div class="row card-group-row mb-16pt mb-lg-40pt">
+    </div> --> 
+                    <div class="row card-group-row mb-16pt mb-lg-40pt" id="change">
                         <div class="col-lg-4 col-sm-6 card-group-row__col">
 
                             <div class="card card-group-row__card text-center o-hidden card--raised border-0">
@@ -273,6 +273,7 @@
                             </div>
 
                         </div>
+                        
                         <div class="col-lg-4 col-sm-6 card-group-row__col">
 
                             <div class="card card-group-row__card text-center o-hidden border-0">
@@ -298,7 +299,51 @@
                             </div>
 
                         </div>
+                        <div class="col-lg-4 col-sm-6 card-group-row__col">
+
+                            <div class="card card-group-row__card text-center o-hidden border-0">
+
+                                <div class="card-body d-flex flex-column">
+                                    <div class="flex-grow mb-16pt">
+                                        <span class="w-64 h-64 icon-holder icon-holder--outline-secondary rounded-circle d-inline-flex mb-16pt">
+                                            <i class="material-icons">business_center</i>
+                                        </span>
+                                        <h4 class="mb-8pt">Enterprise</h4>
+                                        <p class="text-70 mb-0">Build customized learning paths with content that aligns to your internal learning goals.</p>
+                                    </div>
+                                    <p class="d-flex justify-content-center align-items-center m-0">
+                                        <span class="h4 m-0 font-weight-normal">&dollar;</span>
+                                        <span class="h1 m-0 font-weight-normal">49</span>
+                                        <span class="h4 m-0 font-weight-normal">/ month</span>
+                                    </p>
+                                    <p class="lh-1 text-muted mb-0"><small>after the free trial ends</small></p>
+                                </div>
+                                <div class="card-footer">
+                                    <a href="fixed-signup.html" class="btn btn-outline-secondary">Get started</a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+                    <script>
+                        function ShowAll(){
+                            var url  = "http://localhost:3000/api/contents";
+                            var xhr  = new XMLHttpRequest();
+                            var content = '';
+                            xhr.open('GET', url, true);
+                            xhr.onload = function() {
+                                var contents = JSON.parse(xhr.responseText);
+                                if (xhr.readyState == 4 && xhr.status == "200") {
+                                    contents.forEach((val) => {
+                                        content+='<div class="col-lg-4 col-sm-6 card-group-row__col"><div class="card card-group-row__card text-center o-hidden border-0"><div class="card-body d-flex flex-column"><div class="flex-grow mb-16pt"><span class="w-64 h-64 icon-holder icon-holder--outline-secondary rounded-circle d-inline-flex mb-16pt"><i class="material-icons">person</i></span><h4 class="mb-8pt">'+val.Description1+'</h4><p class="text-70 mb-0">'+val.Description2+'</p></div><p class="d-flex justify-content-center align-items-center m-0"><span class="h4 m-0 font-weight-normal">&dollar;</span><span class="h1 m-0 font-weight-normal">'+val.Description3+'</span><span class="h4 m-0 font-weight-normal">'+val.Description4+'</span></p><p class="lh-1 text-muted mb-0"><small>after the free trial ends</small></p></div><div class="card-footer"><a href="fixed-signup.html" class="btn btn-outline-secondary">Get started</a></div></div></div>';
+                                    })
+                                    document.getElementById('change').innerHTML = content;
+                                } else {
+                                    console.error(courses);
+                                }
+                            }
+                            xhr.send(null);
+                        }
+                    </script>
 
                     <div class="page-headline page-headline--white page-headline--title text-center">
                         <h2 class="text-white">All plans include</h2>

@@ -246,15 +246,11 @@
                                 <fieldset role="group" aria-labelledby="label-type" class="m-0 form-group">
                                     <div class="form-row align-items-center">
                                         <label for="payment_cc" id="label-type" class="col-md-3 col-form-label form-label">Payment type</label>
-                                        <div role="group" aria-labelledby="label-type" class="col-md-9">
-                                            <div role="group" class="btn-group btn-group-toggle" data-toggle="buttons">
-                                                <label class="btn btn-outline-secondary active">
-                                                    <input type="radio" id="payment_cc" name="payment_type" value="cc" checked="" aria-checked="true" /> Debit or credit card
-                                                </label>
-                                                <label class="btn btn-outline-secondary">
-                                                    <input type="radio" id="payment_pp" name="payment_type" value="pp" aria-checked="true" /> PayPal
-                                                </label>
-                                            </div>
+                                        <div>
+                                            <select id="id_paymentType">
+                                                <option value='0'>Credit Card</option>
+                                                <option value='1'>Paypal</option>
+                                            </select>
                                         </div>
                                     </div>
                                 </fieldset>
@@ -263,7 +259,7 @@
                                 <div class="form-group row align-items-center mb-0">
                                     <label class="col-form-label form-label col-sm-3">Card number</label>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control" placeholder="Credit / debit card number" />
+                                        <input type="text" class="form-control" placeholder="Credit / debit card number" id='id_cardNumber' />
                                     </div>
                                 </div>
                             </div>
@@ -271,7 +267,7 @@
                                 <div class="form-group row align-items-center mb-0">
                                     <label class="col-form-label form-label col-sm-3">Security code (CVV)</label>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control" placeholder="CVV" style="width:80px">
+                                        <input type="text" id='id_securityCode' class="form-control" placeholder="CVV" style="width:80px">
                                     </div>
                                 </div>
                             </div>
@@ -281,7 +277,7 @@
                                     <div class="col-sm-9">
                                         <div class="form-row">
                                             <div class="col-md-6 mb-16pt mb-sm-0">
-                                                <select class="custom-control custom-select form-control">
+                                                <select class="custom-control custom-select form-control" id='id_expirationDateMonth'>
                                                     <option value="1">January</option>
                                                     <option value="2">February</option>
                                                     <option value="3">March</option>
@@ -297,29 +293,44 @@
                                                 </select>
                                             </div>
                                             <div class="col-md-6">
-                                                <select class="custom-control custom-select form-control">
-                                                    <option value="1" selected="">2016</option>
-                                                    <option value="2">2017</option>
-                                                    <option value="3">2018</option>
-                                                    <option value="3">2019</option>
-                                                    <option value="3">2020</option>
-                                                    <option value="3">2021</option>
-                                                    <option value="3">2022</option>
-                                                    <option value="3">2023</option>
-                                                </select>
+                                                <input type='text' id='id_expirationDateYear' placeholder="expire date (year)">
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="list-group-item text-center">
-                                <button type="submit" class="btn btn-primary">Pay Now</button>
+                                <button type="submit" class="btn btn-primary" onclick='RegisterAccountPayment()'>Pay Now</button>
                             </div>
                         </div>
 
                     </form>
                 </div>
             </div>
+            <script>
+                function RegisterAccountPayment(){
+                    var url  = "http://localhost:3000/api/accountsRegistration/" + localStorage.getItem("userID");
+                    var data = {paymentType: document.getElementById('id_paymentType').value, cardNumber: document.getElementById('id_cardNumber').value, securityCode: document.getElementById('id_securityCode').value, expirationDateMonth: document.getElementById('id_expirationDateMonth').value, expirationDateYear: document.getElementById('id_expirationDateYear').value};
+
+                    var jsonData = JSON.stringify(data);
+                    var xhr  = new XMLHttpRequest();
+
+                    xhr.open('PUT', url, true);
+                    xhr.setRequestHeader('Content-type','application/json; charset=utf-8');
+                    
+                    xhr.onload = function() {
+                        var id = JSON.parse(xhr.responseText);
+                        if (xhr.status == "200" && xhr.readyState == 4) {
+                            alert('Data has been successfully uploaded!');
+                            window.location.replace("fixed-login.html");
+                        } else {
+                            alert('Registration failed! '+ ' Reason: '+ xhr.responseText);
+                            window.location.replace("fixed-signup-payment.html");
+                        }
+                    }
+                    xhr.send(jsonData);
+                }
+            </script>
 
 
 

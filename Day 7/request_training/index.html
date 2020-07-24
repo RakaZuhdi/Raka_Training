@@ -99,12 +99,12 @@
             var content = "<tr><th>ID</th><th>Course Name</th></tr>";
             xhr.open('GET', url, true);
             xhr.onload = function() {
-                var course = JSON.parse(xhr.responseText);
+                var respond = JSON.parse(xhr.responseText);
                 if (xhr.readyState == 4 && xhr.status == "200") {
                     content += "<tr><td>" + course.id + "</td><td>" + course.name + "</td></tr>";
                     document.getElementById('result').innerHTML = content;
                 } else {
-                    console.error(users);
+                    console.error(respond);
                 }
             }
             xhr.send(null);

