@@ -299,12 +299,13 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="list-group-item text-center">
-                                <button type="submit" class="btn btn-primary" onclick='RegisterAccountPayment()'>Pay Now</button>
-                            </div>
                         </div>
 
                     </form>
+
+                    <div class="list-group-item text-center">
+                        <button type="submit" class="btn btn-primary" onclick='RegisterAccountPayment()'>Pay Now</button>
+                    </div>
                 </div>
             </div>
             <script>
@@ -322,10 +323,10 @@
                         var id = JSON.parse(xhr.responseText);
                         if (xhr.status == "200" && xhr.readyState == 4) {
                             alert('Data has been successfully uploaded!');
-                            window.location.replace("fixed-login.html");
+                            window.location.assign("fixed-login.html");
                         } else {
                             alert('Registration failed! '+ ' Reason: '+ xhr.responseText);
-                            window.location.replace("fixed-signup-payment.html");
+                            window.location.assign("fixed-signup-payment.html");
                         }
                     }
                     xhr.send(jsonData);

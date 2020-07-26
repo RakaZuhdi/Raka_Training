@@ -86,7 +86,7 @@
             xhr.onload = function() {
                 var account = JSON.parse(xhr.responseText);
                 if (xhr.readyState == 4 && xhr.status == "200") {
-                    var form ="<form id='id_Form'><input type='text' id='id_Username' placeholder='Input new username' value='"+account.username+"'><br><input type='text' id='id_Email' Placeholder='Input new e-mail' value='"+account.email+"'><br><input type='text' id='id_Password' placeholder='Input new password' value='"+account.password+"'><br><input type='text' id='id_PaymentType' placeholder='Input new payment type' value='"+account.paymentType+"'><br><input type='text' id='id_CardNumber' placeholder='Input new card number' value='"+account.cardNumber+"'><br><input type='text' id='id_expireMonth' placeholder='Input new card expire date(month)'value='"+account.expirationDateMonth+"'><br><input type='text' id='id_expireYear' placeholder='Input new card expire date(year)'value='"+account.expirationDateYear+"'><br><input type='hidden' id='hiddenID' value='"+id+"'>";
+                    var form ="<form id='id_Form'><input type='text' id='id_Username' placeholder='Input new username' value='"+account.username+"'><br><input type='text' id='id_Email' Placeholder='Input new e-mail' value='"+account.email+"'><br><input type='text' id='id_Password' placeholder='Input new password' value='"+account.password+"'><br><input type='text' id='id_PaymentType' placeholder='Input new payment type' value='"+account.paymentType+"'><br><input type='text' id='id_CardNumber' placeholder='Input new card number' value='"+account.cardNumber+"'><br><input type='text' id='id_expireMonth' placeholder='Input new card expire month'value='"+account.expirationDateMonth+"'><br><input type='text' id='id_expireYear' placeholder='Input new card expire year'value='"+account.expirationDateYear+"'><br><input type='hidden' id='hiddenID' value='"+id+"'><br><input type='text' id='id_securityCode' placeholder='input new security code' value='"+account.securityCode+"'>";
                     var button = "<button onclick='updateAccount()'>Click to update</button></form>";
                     document.getElementById('result').innerHTML = form + button;
                 } else {
@@ -97,8 +97,7 @@
         }
 
         function updateAccount() {
-            var url = "http://localhost:3000/api/accountsRegistration/" + localStorage.getItem('userID');
-            console.log('Edit account has been initialized 1!');
+            var url = "http://localhost:3000/api/accountsRegistration/" + document.getElementById('hiddenID').value;
             var data = {};
             
             data.username = document.getElementById('id_Username').value;
@@ -115,12 +114,10 @@
             xhr.open('PUT', url, true);
             xhr.setRequestHeader('Content-type','application/json; charset=utf-8');
             xhr.onload = function() {
-                var course = JSON.parse(xhr.responseText);
                 if (xhr.readyState == 4 && xhr.status == "200") {
-                    var alert = "User data has been changed!";
-                    document.getElementById('result').innerHTML = alert;
+                    document.getElementById('result').innerHTML = 'Data has been changed!';
                 } else {
-                    console.error(users);
+                    console.log('error');
                 }
             }
             xhr.send(json);

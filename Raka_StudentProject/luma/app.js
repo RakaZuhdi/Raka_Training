@@ -27,27 +27,35 @@ app.use((req, res, next) => {
 
 app.get('/api/contents', (req,res) =>{
     var datetime = new Date();
-    console.log('Get contents has been initialized ' + datetime);
+    console.log(datetime)
+    console.log('Get contents has been initialized !\n');
     console.log(contents);
     res.send(contents);
 });
 
 
 app.get("/api/accounts", (req, res) => {
+    var datetime = new Date();
+    console.log(datetime);
+    console.log('Get all accounts has been initialized!\n');
     res.send(accounts);
-    console.log('Get all accounts has been initialized!');
+    
 });
 
 app.get('/api/accounts/:id', (req, res) => {
+    var datetime = new Date();
+    console.log(datetime);
+    console.log('Get account detail has been initialized!\n');
+
     const account = accounts.find( a => a.id === parseInt(req.params.id) );
-    console.log(account);
     if (!account) return res.status(404).send('ID does not exist');
-    console.log('Get account detail has been initialized!');
+    console.log(account +'\n');
     return res.json(account);
 });
 app.get('/api/contents/:id', (req, res) => {
     var datetime = new Date();
-    console.log('Get content detail has been initialized!' + datetime);
+    console.log(datetime);
+    console.log('Get content detail has been initialized!\n');
     const content = contents.find( a => a.contentID === parseInt(req.params.id) );
     console.log(contents);
     if (!content) return res.status(404).send('ID does not exist');
@@ -57,20 +65,23 @@ app.get('/api/contents/:id', (req, res) => {
 
 app.delete('/api/accounts/:id', (req, res) => {
     var datetime = new Date();
-    console.log('Delete account has bee initiated! ' + datetime);
+    console.log(datetime);
+    console.log('Delete account has been initiated!');
+
     const account = accounts.find( a => a.id === parseInt(req.params.id) );
     if (!account) return res.status(404).send('ID does not exist');
     const index = accounts.indexOf(account);
     var status = accounts.splice(index, 1);
     if(status){
-        console.log('Account with id: ' + req.params.id + ' has been deleted!');
+        console.log('Account with id: ' + req.params.id + ' has been deleted!\n');
     }
     return res.json(account);
 });
 
 app.delete('/api/contents/:id', (req, res) => {
     var datetime = new Date();
-    console.log('Delete content has been initiated!' +datetime);
+    console.log(datetime);
+    console.log('Delete content has been initiated!\n');
     const content = contents.find( a => a.contentID === parseInt(req.params.id) );
     if (!content) return res.status(404).send('ID does not exist');
     const index = contents.indexOf(content);
@@ -83,7 +94,8 @@ app.delete('/api/contents/:id', (req, res) => {
 
 app.get('/api/accountLogin/:email/:password', (req, res) => {
     var datetime = new Date();
-    console.log('Login page has been initialized!' + datetime);
+    console.log(datetime);
+    console.log('Login page has been initialized!\n');
     var email = req.params.email;
     var password = req.params.password;
 
@@ -106,7 +118,8 @@ app.get('/api/accountLogin/:email/:password', (req, res) => {
 
 app.put('/api/accounts/:id', (req, res) => {
     var datetime = new Date();
-    console.log('Edit account page has been initialized!' + datetime);
+    console.log(datetime);
+    console.log('Edit account page has been initialized!\n');
     
     const result = validateAccount(req.body);
     if (result.error) {
@@ -129,15 +142,20 @@ app.put('/api/accounts/:id', (req, res) => {
 
 app.put('/api/contents/:id', (req, res) => {
     var datetime = new Date();
-    console.log('Edit content has been initialized! ' + datetime);
+    console.log(datetime);
+    console.log('Edit content has been initialized!\n');
     const content = contents.find( a => a.contentID === parseInt(req.params.id) );
     if (!content) return res.status(404).send('ID not found.');
+
+    
     return res.json(content);
 });
 
 app.put('/api/accountsRegistration/:id', (req, res) => {
     var datetime = new Date();
-    console.log('Payment data page has been initialized!' + datetime);
+    console.log(datetime);
+    console.log('Payment data page has been initialized!\n');
+
     const account = accounts.find( a => a.id === parseInt(req.params.id) );
     if (!account) return res.status(404).send('ID not found.');
     const schema = Joi.object({
@@ -165,7 +183,8 @@ app.put('/api/accountsRegistration/:id', (req, res) => {
 
 app.post('/api/createContent/:description1/:description2/:description3/:description4',(req,res)=>{
     var datetime = new Date();
-    console.log('Create content page has been initialized!' + datetime);
+    console.log(datetime);
+    console.log('Create content page has been initialized!\n');
     const content = {
         contentID: contents.length+1,
         Description1: req.params.description1,
@@ -193,7 +212,8 @@ app.post('/api/createContent/:description1/:description2/:description3/:descript
 
 app.put('/api/contentsRegistration/:id', (req, res) => {
     var datetime = new Date();
-    console.log('Update content page has been initialized!' + datetime);
+    console.log(datetime);
+    console.log('Update content page has been initialized!\n');
     const content = contents.find( a => a.contentID === parseInt(req.params.id) );
     if (!content) return res.status(404).send('ID not found.');
     const schema = Joi.object({
@@ -220,7 +240,8 @@ app.put('/api/contentsRegistration/:id', (req, res) => {
 
 app.post('/api/accounts/', (req, res) => {
     var datetime = new Date();
-    console.log('Register account page has been initialized!' + datetime);
+    console.log(datetime);
+    console.log('Register account page has been initialized!\n');
     const schema = Joi.object({
         username: Joi.string().min(3).required(),
         email: Joi.string().min(6).email().required(),
@@ -235,31 +256,24 @@ app.post('/api/accounts/', (req, res) => {
     const findEmail = accounts.find( a => a.email === req.body.email);
     if (findEmail){
         console.log('Registration Failed!');
-        return res.status(404).send('Email already exist.');
+        return res.status(404).send({respond: 'Email already exist.'});
     }
     const account = {
         id: accounts.length + 1,
         username: req.body.username,
         email: req.body.email,
-        password: req.body.password
+        password: req.body.password,
+        status: 200
     };
     var userID = account.id;
+    res.status(200).json(account);
     accounts.push(account);
 
     console.log('User has successfully been registered');
     console.log(account);
-
-    res.send({status: 200, id: userID});
-    return;
-});
-
-app.post('/api/accounts/:id', (req, res) => {
-    var datetime = new Date();
-    console.log('Register user page has been initialized!' + datetime);
-    res.send('success');
 });
 
 const port = /*process.env.PORT ||*/ 3000;
 app.listen(port, () => {
-    console.log(`Listening on port ${port}`);
+    console.log(`Listening on port ${port}\n`);
 });

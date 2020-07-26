@@ -224,10 +224,12 @@
                             <input id="id_password" type="password" class="form-control" placeholder="Your first and last name ...">
                             <p class="text-right"><a href="fixed-reset-password.html" class="small">Forgot your password?</a></p>
                         </div>
-                        <div class="text-center">
-                            <button class="btn btn-primary" onclick="LoginFunction()">Login</button>
-                        </div>
+                        
                     </form>
+                    <div class="text-center">
+                        <button class="btn btn-primary" onclick="LoginFunction()">Login</button>
+                    </div>
+
                     <table id="debug">
                     </table>
                 </div>
@@ -254,8 +256,7 @@
                     }
                     
                     var url = 'http://localhost:3000/api/accountLogin/'+idEmail+'/'+idPassword;
-                    
-                    document.getElementById('debug').innerHTML = url;
+                
                     var xhr  = new XMLHttpRequest();
                     xhr.open('GET', url, true);
                     xhr.onload = function() {

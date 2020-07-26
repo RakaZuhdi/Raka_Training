@@ -1,0 +1,41 @@
+NOTES:
+
+Features:
+- Login & Register.
+- CRUD Accounts.
+- CRUD Content.
+
+--NODE.JS--
+File: app.js
+
+--REGISTER--
+File: fixed-signup.html
+screenshot(screenshot_register)
+
+--REGISTER PAYMENT--
+File: fixed-signup-payment.html
+screenshot(screenshot_registerPayment)
+
+--LOGIN--
+File: fixed-login.html
+screenshot(screenshot_login)
+
+--CRUD Accounts--
+File: AccountsCRUD.html
+screenshot(screenshot_crudAccounts)
+
+--CRUD Pricing--
+File: PriceCRUD.html
+File: fixed-pricing.html
+screenshot(screenshot_crudPricing)
+
+html files:
+- fixed-signup.html
+- fixed-signup-payment.html
+- fixed-login.html
+- AccountsCRUD.html
+- PriceCRUD.html
+- fixed-pricing.html
+
+js files:
+- app.js
