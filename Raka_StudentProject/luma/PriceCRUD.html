@@ -1,10 +1,17 @@
 <html>
     <head>
-        <title>CRUD for Price List</title>
+        <title>CRUD for Subscription Plan</title>
     </head>
     <body>
-        <table>
+        <table class="container">
+            <tr>
+                <td></td><td><p style="text-emphasis: size 30px;"></p><h1>CRUD for Subscription Plan</h1></p></td>
+            </tr>
+        </table>
+        
+        <table class='container' style="border: 5px solid rgb(47, 248, 164)">
             <div>
+                
                 <tr>
                     <td>Get All Contents</td><td>Get Content Detail</td><td>Delete Content</td><td>Update Content</td><td>Create Content</td>
                 </tr>
@@ -13,6 +20,7 @@
                     <td><input type='text' placeholder='Input id to be more detailed' id='id_ContentDetail'></td>
                     <td><input type='text' placeholder='Input id to delete' id='id_DeleteContent'></td>
                     <td><input type='text' placeholder='Input id to update' id='id_UpdateContent'></td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td><button onclick='getAllContents()'>Click Here</button></td>
@@ -25,7 +33,7 @@
         </table>
         <table id='result'class='container'>
         </table>
-        <form id='form'>
+        <form id='form' class='table'>
         </form>
         <div><!--
             <form id='id_Form'>
@@ -40,6 +48,8 @@
             </form>-->
         </div>
     </body>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
     
     <script>
         function CreateContent(){

@@ -262,9 +262,8 @@
                         if (xhr.status == "200" && xhr.readyState == 4) {
                             var id = JSON.parse(xhr.responseText);
                             alert('You have succesfully logged in!');
-                            window.location.replace("fixed-index.html");
                             localStorage.setItem("session_userID", id.id);
-
+                            window.location.replace("fixed-index.html");
                         } else {
                             alert('Registration failed! '+ ' Reason: '+ xhr.responseText);
                             window.location.replace("fixed-login.html");
@@ -275,8 +274,13 @@
             </script>
         </div>
         <!-- // END Header Layout Content -->
+<button onclick="ChangeUsername()">Click</button>
 
-
+<script>
+    function ChangeUsername(){
+        document.getElementById("header-username").innerHTML = localStorage.getItem('Username');
+    }
+</script>
         <div class="js-fix-footer2 bg-white border-top-2">
             <div class="container page__container page-section d-flex flex-column">
                 <p class="text-70 brand mb-24pt">

@@ -5,13 +5,13 @@ app = express();
 const accounts = [
     { id: 1, username: 'Raka Zuhdi', email: 'rakazhp@gmail.com', password:'raka123', paymentType: '1', cardNumber:'01293881', securityCode:'123', expirationDateMonth:'1', expirationDateYear:'2023'},
     { id: 2, username: 'Orlando Zaska', email: 'orlando@gmail.com', password:'orlando123', paymentType: '0', cardNumber:'12310023', securityCode:'456', expirationDateMonth:'12', expirationDateYear:'2024' },
-    { id: 3, username: 'John', email: 'titor@gmail.com', password:'orlando123'}
+    { id: 3, username: 'Lorem Ipsum', email: 'Ipsum@gmail.com', password:'lorem1234'}
 ];
 
 
 const contents = [
-    {contentID: 1, Description1: 'Desc1', Description2: 'Desc2', Description3: 'Desc3', Description4: 'Desc'},
-    {contentID: 2, Description1: 'Desc1', Description2: 'Desc2', Description3: 'Desc3', Description4: 'Desc4'}
+    {contentID: 1, Description1: 'Economic', Description2: '1 account', Description3: '9.99', Description4: '/month'},
+    {contentID: 2, Description1: 'Budget', Description2: '3 accounts', Description3: '18.99', Description4: '/month'}
 ];
 
 app.use(express.json());
@@ -105,6 +105,8 @@ app.get('/api/accountLogin/:email/:password', (req, res) => {
 });
 
 app.put('/api/accounts/:id', (req, res) => {
+    var datetime = new Date();
+    console.log('Edit account page has been initialized!' + datetime);
     
     const result = validateAccount(req.body);
     if (result.error) {
@@ -113,7 +115,6 @@ app.put('/api/accounts/:id', (req, res) => {
     }
     const account = accounts.find( a => a.id === parseInt(req.params.id) );
     if (!account) return res.status(404).send('ID not found.');
-    console.log('Edit account has been initialized!');
 
     account.username= req.body.username;
     account.email = req.body.email;
@@ -135,8 +136,8 @@ app.put('/api/contents/:id', (req, res) => {
 });
 
 app.put('/api/accountsRegistration/:id', (req, res) => {
-    console.log('Input payment data has been initialized!');
-    
+    var datetime = new Date();
+    console.log('Payment data page has been initialized!' + datetime);
     const account = accounts.find( a => a.id === parseInt(req.params.id) );
     if (!account) return res.status(404).send('ID not found.');
     const schema = Joi.object({
@@ -163,14 +164,14 @@ app.put('/api/accountsRegistration/:id', (req, res) => {
 });
 
 app.post('/api/createContent/:description1/:description2/:description3/:description4',(req,res)=>{
-    console.log('Create content has been initialized');
-
+    var datetime = new Date();
+    console.log('Create content page has been initialized!' + datetime);
     const content = {
         contentID: contents.length+1,
         Description1: req.params.description1,
         Description2: req.params.description2,
         Description3: req.params.description3,
-        Description4: req.params.description4
+        Description4: '/'+ req.params.description4
     }
     const schema = Joi.object({
         contentID: Joi.required(),
@@ -191,8 +192,8 @@ app.post('/api/createContent/:description1/:description2/:description3/:descript
 });
 
 app.put('/api/contentsRegistration/:id', (req, res) => {
-    console.log('Update content has been initialized');
-    
+    var datetime = new Date();
+    console.log('Update content page has been initialized!' + datetime);
     const content = contents.find( a => a.contentID === parseInt(req.params.id) );
     if (!content) return res.status(404).send('ID not found.');
     const schema = Joi.object({
@@ -218,22 +219,20 @@ app.put('/api/contentsRegistration/:id', (req, res) => {
 });
 
 app.post('/api/accounts/', (req, res) => {
-    console.log('Register user has been initialized!');
-
+    var datetime = new Date();
+    console.log('Register account page has been initialized!' + datetime);
     const schema = Joi.object({
         username: Joi.string().min(3).required(),
         email: Joi.string().min(6).email().required(),
         password :Joi.string().min(8).required()
     });
-
-    const findEmail = accounts.find( a => a.email === req.body.email);
-    
     const validation= schema.validate(req.body);
     if(validation.error){
         console.log(validation);
         return res.status(404).send(validation);
     }
-    
+
+    const findEmail = accounts.find( a => a.email === req.body.email);
     if (findEmail){
         console.log('Registration Failed!');
         return res.status(404).send('Email already exist.');
@@ -251,10 +250,12 @@ app.post('/api/accounts/', (req, res) => {
     console.log(account);
 
     res.send({status: 200, id: userID});
+    return;
 });
 
 app.post('/api/accounts/:id', (req, res) => {
-    console.log('Register user payment has been initialized!');
+    var datetime = new Date();
+    console.log('Register user page has been initialized!' + datetime);
     res.send('success');
 });
 
